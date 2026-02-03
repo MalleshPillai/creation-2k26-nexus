@@ -68,10 +68,12 @@ const HeroSection = () => {
           </div>
 
           {/* Main Title */}
+          <p className="text-sm md:text-base uppercase tracking-[0.35em] text-muted-foreground/90 mb-4 animate-fade-in" style={{ animationDelay: "80ms" }}>
+            Make Mind Marvel
+          </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style={{ animationDelay: "100ms" }}>
-            <span className="gradient-text">CREATION</span>
-            <br />
-            <span className="text-foreground">2K26</span>
+            <span className="hero-creation-text block">CREATION</span>
+            <span className="text-foreground block mt-2 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">2K26</span>
           </h1>
 
           {/* Tagline */}

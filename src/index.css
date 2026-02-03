@@ -168,6 +168,41 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
   }
 
+  /* Hero CREATION – brush/paint font + iridescent gradient + 3D gloss */
+  .hero-creation-text {
+    font-family: "Rubik Wet Paint", "Pacifico", system-ui, sans-serif;
+    font-weight: 400;
+    background: linear-gradient(
+      105deg,
+      #ff8c42 0%,
+      #ffb347 12%,
+      #ffd93d 24%,
+      #ff6b9d 36%,
+      #e040fb 48%,
+      #7c4dff 60%,
+      #00bcd4 74%,
+      #26c6da 88%,
+      #69f0ae 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4))
+            drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3))
+            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2))
+            drop-shadow(0 0 20px rgba(224, 64, 251, 0.25))
+            drop-shadow(0 0 40px rgba(0, 188, 212, 0.15));
+    letter-spacing: 0.02em;
+    animation: hero-gradient-shift 8s ease-in-out infinite;
+  }
+
+  @keyframes hero-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
   .gradient-text-cyan {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-300;
   }
