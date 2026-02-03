@@ -168,10 +168,10 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
   }
 
-  /* Hero CREATION & 2K26 – bold display font + iridescent gradient + 3D gloss */
+  /* Hero CREATION & 2K26 – Fleur De Leah script + iridescent gradient + 3D gloss */
   .hero-creation-text,
   .hero-year-text {
-    font-family: "Bebas Neue", "Oswald", system-ui, sans-serif;
+    font-family: "Fleur De Leah", "Pacifico", cursive;
     font-weight: 400;
     background: linear-gradient(
       105deg,
