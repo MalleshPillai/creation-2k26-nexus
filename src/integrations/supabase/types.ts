@@ -14,16 +14,256 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      event_registrations: {
+        Row: {
+          event_id: string
+          id: string
+          registered_at: string
+          user_id: string
+        }
+        Insert: {
+          event_id: string
+          id?: string
+          registered_at?: string
+          user_id: string
+        }
+        Update: {
+          event_id?: string
+          id?: string
+          registered_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_registrations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          accent_color: string
+          category: Database["public"]["Enums"]["event_category"]
+          created_at: string
+          description: string
+          icon_name: string
+          id: string
+          name: string
+          rules: string
+        }
+        Insert: {
+          accent_color: string
+          category: Database["public"]["Enums"]["event_category"]
+          created_at?: string
+          description: string
+          icon_name: string
+          id?: string
+          name: string
+          rules: string
+        }
+        Update: {
+          accent_color?: string
+          category?: Database["public"]["Enums"]["event_category"]
+          created_at?: string
+          description?: string
+          icon_name?: string
+          id?: string
+          name?: string
+          rules?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          event_id: string | null
+          id: string
+          is_global: boolean
+          message_type: Database["public"]["Enums"]["message_type"]
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          is_global?: boolean
+          message_type?: Database["public"]["Enums"]["message_type"]
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          is_global?: boolean
+          message_type?: Database["public"]["Enums"]["message_type"]
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          college: string | null
+          created_at: string
+          department: string | null
+          email: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          college?: string | null
+          created_at?: string
+          department?: string | null
+          email: string
+          id: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          college?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      student_incharges: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_incharges_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      winners: {
+        Row: {
+          declared_at: string
+          declared_by: string | null
+          event_id: string
+          id: string
+          position: number
+          user_id: string
+        }
+        Insert: {
+          declared_at?: string
+          declared_by?: string | null
+          event_id: string
+          id?: string
+          position: number
+          user_id: string
+        }
+        Update: {
+          declared_at?: string
+          declared_by?: string | null
+          event_id?: string
+          id?: string
+          position?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "winners_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_event_incharge: {
+        Args: { _event_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_registered_for_event: {
+        Args: { _event_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "participant" | "student_incharge" | "creation_admin"
+      event_category: "technical" | "non_technical"
+      message_type: "announcement" | "event_update" | "global"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +390,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["participant", "student_incharge", "creation_admin"],
+      event_category: ["technical", "non_technical"],
+      message_type: ["announcement", "event_update", "global"],
+    },
   },
 } as const
