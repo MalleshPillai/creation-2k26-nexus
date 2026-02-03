@@ -41,19 +41,54 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-16">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Gradient orbs */}
-        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl" />
-        
+      {/* Background Effects - wave colors */}
+      <div className="absolute inset-0 overflow-hidden bg-background">
+        {/* Animated iridescent wave gradient base */}
+        <div 
+          className="absolute inset-0 opacity-40 hero-wave-gradient"
+          aria-hidden
+        />
+        {/* SVG wave layers with gradient fills */}
+        <div className="absolute inset-0 opacity-30 hero-wave-shapes" aria-hidden>
+          <svg className="absolute bottom-0 left-0 w-full h-1/2 animate-wave-slow" viewBox="0 0 1200 400" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="hero-wave-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff8c42" stopOpacity="0.6" />
+                <stop offset="50%" stopColor="#e040fb" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#00bcd4" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#hero-wave-grad-1)" d="M0,200 Q300,80 600,200 T1200,200 L1200,400 L0,400 Z" />
+          </svg>
+          <svg className="absolute bottom-0 left-0 w-full h-1/2 animate-wave-slower" viewBox="0 0 1200 400" preserveAspectRatio="none" style={{ animationDelay: "-1.5s" }}>
+            <defs>
+              <linearGradient id="hero-wave-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#7c4dff" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#ff6b9d" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#69f0ae" stopOpacity="0.4" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#hero-wave-grad-2)" d="M0,250 Q400,120 800,250 T1600,250 L1600,400 L0,400 Z" />
+          </svg>
+          <svg className="absolute top-0 left-0 w-full h-1/3 animate-wave-slow" viewBox="0 0 1200 300" preserveAspectRatio="none" style={{ animationDelay: "-0.5s" }}>
+            <defs>
+              <linearGradient id="hero-wave-grad-3" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#26c6da" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#e040fb" stopOpacity="0.35" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#hero-wave-grad-3)" d="M0,100 Q600,0 1200,100 L1200,300 L0,300 Z" />
+          </svg>
+        </div>
+        {/* Soft gradient orbs (kept subtle behind waves) */}
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-secondary/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
         {/* Grid pattern */}
         <div 
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: `linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px),
+                              linear-gradient(90deg, hsl(var(--primary) / 0.15) 1px, transparent 1px)`,
             backgroundSize: "50px 50px",
           }}
         />
